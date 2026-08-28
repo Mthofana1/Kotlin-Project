@@ -30,7 +30,7 @@ data class Room (
     )
 )
 
-fun move(currentRoom: String, direction: String): String? {
+fun move(currentRoom: String, direction: String?): String? {
     return rooms[currentRoom]
 }
 
@@ -53,12 +53,12 @@ fun main() {
             }
 
             command == "look" -> {
-                println(rooms[currentRoom])
+                println(rooms[currentRoom].)
             }
 
             command?.startsWith("go ") == true -> {
 
-                val direction = command.removePrefix("go ").trim()
+               val direction : String?
 
                 currentRoom = move(currentRoom, direction)
                     ?: currentRoom.also {
