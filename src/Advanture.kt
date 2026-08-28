@@ -31,7 +31,7 @@ data class Room (
 )
 
 fun move(currentRoom: String, direction: String): String? {
-    return rooms[currentRoom]?.exits?.get(direction)
+    return rooms[currentRoom]
 }
 
 fun main() {
@@ -41,13 +41,10 @@ fun main() {
 
     while (playing && currentRoom != "exit") {
 
-        // Print the current room description
         println()
-        println(rooms[currentRoom]?.description)
+        println(rooms[currentRoom])
 
-        // Ask the player for a command
         print("What do you want to do? ")
-        val command = readLine()?.lowercase()?.trim()
 
         when {
             command == "quit" -> {
@@ -56,15 +53,13 @@ fun main() {
             }
 
             command == "look" -> {
-                println(rooms[currentRoom]?.description)
+                println(rooms[currentRoom])
             }
 
             command?.startsWith("go ") == true -> {
 
-                // Get the direction after "go "
                 val direction = command.removePrefix("go ").trim()
 
-                // Move to the new room, or stay where we are if there is no exit
                 currentRoom = move(currentRoom, direction)
                     ?: currentRoom.also {
                         println("You can't go that way.")
@@ -80,7 +75,7 @@ fun main() {
 
     if (currentRoom == "exit") {
         println()
-        println(rooms[currentRoom]?.description)
+        println(rooms[currentRoom])
         println("You completed the game!")
     }
 }
